@@ -10,8 +10,6 @@ export default function Home( { collection } ) {
 
   const products = collection.products.edges
 
-  console.log(SliderData)
-
   return (
     <div className={styles.container}>
       <Head>

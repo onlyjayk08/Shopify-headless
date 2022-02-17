@@ -16,7 +16,7 @@ export default function ImageSlider({ sliderData }) {
         <div className='pb-5'>
             <Slider {...settings}>
                 {sliderData.map((slide) => (
-                    <div>
+                    <div  key={slide.key}>
                         <img className='lg:h-[36rem] mx-auto' src={slide.image}/>
                     </div>
                 ))}

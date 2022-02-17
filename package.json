@@ -1,6 +1,7 @@
 {
   "name": "shopify-next",
   "private": true,
+  "proxy": "https://shopify-headless-next.herokuapp.com:3000/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
