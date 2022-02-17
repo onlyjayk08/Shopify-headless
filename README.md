@@ -1,5 +1,13 @@
-This is a [Shopify headless] project using [Next.js]
+This is a Shopify headless project using Next.js and [Shopify GraphQL Storefront API](https://shopify.dev/api/storefront#top)
+
+## Deployed
+The project is deployed on [heroku](www.heroku.com) 
+
+View Demo on [https://shopify-headless-next.herokuapp.com/](https://shopify-headless-next.herokuapp.com/)
+
 ## Getting Started
+
+
 
 First, run the development server:
 
