@@ -1,7 +1,7 @@
 import { getAllCollections ,recursiveCollectionCatalog, getCollection } from "../../lib/shopify"
 import ProductList from "../../components/ProductList"
 
-export default function CollectionPage({ collection, router }){
+export default function CollectionPage({ collection }){
 
     const products = collection.products.edges
 
@@ -15,28 +15,28 @@ export default function CollectionPage({ collection, router }){
 
   
 export async function getStaticPaths() {
-    const collections = await recursiveCollectionCatalog()
+  const collections = await recursiveCollectionCatalog()
   
-    const paths = collections.map(item => {
-      const collection = String(item.node.handle)
-  
-      return {
-        params: { collection }
-      }
-    })
-  
+  const paths = collections.map(item => {
+    const collection = String(item.node.handle)
+
     return {
-      paths,
-      fallback: false
+      params: { collection }
+    }
+  })
+  
+  return {
+    paths,
+    fallback: false
+  }
+}
+  
+export async function getStaticProps({ params }) {
+  const collection = await getCollection(params.collection)
+
+  return {
+    props: {
+      collection
     }
   }
-  
-  export async function getStaticProps({ params }) {
-    const collection = await getCollection(params.collection)
-  
-    return {
-      props: {
-        collection
-      }
-    }
-  }
+}

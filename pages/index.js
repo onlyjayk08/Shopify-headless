@@ -5,6 +5,7 @@ import ProductList from '../components/ProductList'
 import { getCollection } from '../lib/shopify'
 import ImageSlider from '../components/SlickSlider'
 import { SliderData } from '../components/SliderData'
+import FeaturedCollection from '../components/FeaturedCollection'
 
 export default function Home( { collection } ) {
 
@@ -20,7 +21,7 @@ export default function Home( { collection } ) {
       <div className='pb-10'>
         <ImageSlider sliderData={SliderData}/>
       </div>
-      <ProductList products={products}/>
+      <FeaturedCollection products={products}/>
     </div>
   )
 }

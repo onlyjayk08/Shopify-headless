@@ -23,6 +23,11 @@ export default function Header({collections, storeName}){
                         </a>
                     </Link> 
                 </div>
+                <Link href="/account">
+                    <a>
+                        Account
+                    </a>
+                </Link>  
                 <Link href="/cart">
                     <a>
                         Cart({cartQuantity})
