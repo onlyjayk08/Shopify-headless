@@ -26,7 +26,7 @@ export default function ProductForm({ product }) {
   const [available, setAvailable] = useState(true)
 
   
-  const { addToCart} = useContext(CartContext)
+  const { addToCart } = useContext(CartContext)
 
   const allVariantOptions = product.variants.edges?.map(variant => {
     const allOptions = {}

@@ -1,4 +1,4 @@
-import { getBlogs } from "../lib/shopify"
+import { getAllBlogs } from "../lib/shopify"
 import BlogList from "../components/BlogList";
 
 export default function Blogs({ blogs }){
@@ -17,7 +17,7 @@ export default function Blogs({ blogs }){
 }
 
 export async function getStaticProps(){
-    const blogs = await getBlogs();
+    const blogs = await getAllBlogs();
 
     return {
         props: { blogs }

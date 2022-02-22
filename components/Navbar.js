@@ -41,7 +41,24 @@ export default function Navbar(  ){
                             </a>
                         </Link>
                     </div>
-                    
+                </li>
+                <li>
+                    <div  className="block p-4 hover:opacity-80">
+                        <Link href={"/pages"}>
+                            <a>
+                                CMS Pages
+                            </a>
+                        </Link>
+                    </div>
+                </li>
+                <li>
+                    <div  className="block p-4 hover:opacity-80">
+                        <Link href={"/pages/about-us"}>
+                            <a>
+                                About Us
+                            </a>
+                        </Link>
+                    </div>
                 </li>
             </ul>
         </nav>
