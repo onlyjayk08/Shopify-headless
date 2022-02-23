@@ -1,5 +1,5 @@
 import ProductPageContent from "../../components/ProductPageContent"
-import { getAllProducts, getProduct, recursiveProductCatalog } from "../../lib/shopify"
+import { getProduct, recursiveProductCatalog } from "../../lib/shopify"
 
 export default function ProductPage({ product }) {
 

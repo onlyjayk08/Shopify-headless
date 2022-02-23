@@ -43,7 +43,7 @@ export default function ProductForm({ product }) {
       options: allOptions,
       variantTitle: variant.node.title,
       variantPrice: variant.node.priceV2.amount,
-      variantQuantity: 1
+      variantQuantity: 0
     }
   })
 
@@ -54,6 +54,7 @@ export default function ProductForm({ product }) {
 
   const [selectedVariant, setSelectedVariant] = useState(allVariantOptions[0])
   const [selectedOptions, setSelectedOptions] = useState(defaultValues)
+  const [variantQuantity, setVariantQuantity] = useState(1)
 
   function setOptions(name, value) {
     setSelectedOptions(prevState => {
@@ -84,6 +85,11 @@ export default function ProductForm({ product }) {
       }
     }
   }, [productInventory, selectedVariant])
+
+  const handleQuantityChange = (event) =>{
+    setVariantQuantity(event.target.value);
+  }
+
   return (
     <div>
       <h2 >{product.title}</h2>
@@ -102,11 +108,17 @@ export default function ProductForm({ product }) {
           />
         ))
       }
+      <br />
+      <label>
+        Quantity
+        <input min="1" type="number" defaultValue={variantQuantity} onChange={handleQuantityChange}></input>
+      </label>
+      <br />
       {
         available ?
           <button
             onClick={() => {
-              addToCart(selectedVariant)
+              addToCart(selectedVariant, variantQuantity)
             }}
             >Add To Card
           </button> :

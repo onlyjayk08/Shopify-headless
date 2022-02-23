@@ -26,7 +26,7 @@ export default function ShopProvider({ children }) {
   }, [])
 
 
-  async function addToCart(newItem) {
+  async function addToCart(newItem, variantQuantity) {
     setCartOpen(true)
 
     console.log(newItem)
@@ -34,6 +34,7 @@ export default function ShopProvider({ children }) {
     if(cart.length === 0) {
       setCart([newItem])
 
+      newItem.variantQuantity = parseInt(variantQuantity);
       const checkout = await createCheckout(newItem.id, newItem.variantQuantity)
 
       setCheckoutId(checkout.id)
@@ -46,13 +47,14 @@ export default function ShopProvider({ children }) {
       
       cart.map(item => {
         if (item.id === newItem.id) {
-          item.variantQuantity++
+          item.variantQuantity = parseInt(item.variantQuantity) + parseInt(variantQuantity)
           newCart = [...cart]
           added = true
         } 
       })
 
       if(!added) {
+        newItem.variantQuantity = parseInt(variantQuantity);
         newCart = [...cart, newItem]
       }
 
