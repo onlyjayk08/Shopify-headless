@@ -29,7 +29,7 @@ export default function CollectionPage({ collection, filterCollection }){
           <h1>{collection.title}</h1>
           <p>Filters:</p>
           {filters.map((filter, index)=>(
-            <div>
+            <div key={`filter-${index}`}>s
               <details data-index={index}>
                 <summary>
                   <div>
