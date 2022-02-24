@@ -29,15 +29,15 @@ export default function CollectionPage({ collection, filterCollection }){
           <h1>{collection.title}</h1>
           <p>Filters:</p>
           {filters.map((filter, index)=>(
-            <div key={`filter-${index}`}>s
+            <div key={`filter-${index}`}>
               <details data-index={index}>
                 <summary>
                   <div>
                     <span>{filter.label}</span>
                   </div>
                   <ul role="list">
-                    {filter.values.map((value) => (
-                      <div>
+                    {filter.values.map((value, i) => (
+                      <div key={`filtervalue-${i}`}>
                         <li>{value.label}({value.count})</li>
                       </div>
                     ))}
