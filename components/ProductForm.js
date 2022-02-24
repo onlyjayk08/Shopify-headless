@@ -93,7 +93,8 @@ export default function ProductForm({ product }) {
   return (
     <div>
       <h2 >{product.title}</h2>
-      <span >{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span>
+      {/* <span >{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span> */}
+      <span >{formatter.format(selectedVariant.variantPrice)}</span>
       {
         product.options.map(({ name, values }) => (
           <ProductOptions
@@ -108,12 +109,12 @@ export default function ProductForm({ product }) {
           />
         ))
       }
-      <br />
+      <br/>
       <label>
         Quantity
         <input min="1" type="number" defaultValue={variantQuantity} onChange={handleQuantityChange}></input>
       </label>
-      <br />
+      <br/>
       {
         available ?
           <button
