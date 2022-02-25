@@ -31,7 +31,7 @@ export default function ShopProvider({ children }) {
 
     console.log(newItem)
 
-    if(cart.length === 0) {
+    if (cart.length === 0) {
       setCart([newItem])
 
       newItem.variantQuantity = parseInt(variantQuantity);
@@ -44,16 +44,16 @@ export default function ShopProvider({ children }) {
     } else {
       let newCart = []
       let added = false
-      
+
       cart.map(item => {
         if (item.id === newItem.id) {
           item.variantQuantity = parseInt(item.variantQuantity) + parseInt(variantQuantity)
           newCart = [...cart]
           added = true
-        } 
+        }
       })
 
-      if(!added) {
+      if (!added) {
         newItem.variantQuantity = parseInt(variantQuantity);
         newCart = [...cart, newItem]
       }
@@ -62,6 +62,34 @@ export default function ShopProvider({ children }) {
       const newCheckout = await updateCheckout(checkoutId, newCart)
       localStorage.setItem("checkout_id", JSON.stringify([newCart, newCheckout]))
     }
+  }
+
+  async function updateLineItemInCart(updateItem, itemQuantityUpdate) {
+    let newCart = []
+    let updated = false
+
+    console.log(updateItem);
+
+    cart.map(item => {
+
+      if (item.id === updateItem.id) {
+        item.variantQuantity = parseInt(itemQuantityUpdate)
+        newCart = [...cart]
+        updated = true
+      }
+
+    })
+
+    if (!updated) {
+      updateItem.variantQuantity = parseInt(itemQuantityUpdate);
+      newCart = [...cart, updateItem]
+    }
+
+    setCart(newCart)
+    const newCheckout = await updateCheckout(checkoutId, newCart)
+    localStorage.setItem("checkout_id", JSON.stringify([newCart, newCheckout]))
+
+
   }
 
   async function removeCartItem(itemToRemove) {
@@ -79,13 +107,14 @@ export default function ShopProvider({ children }) {
   }
 
   return (
-    <CartContext.Provider value={{ 
+    <CartContext.Provider value={{
       cart,
       cartOpen,
       setCartOpen,
       addToCart,
       checkoutUrl,
-      removeCartItem
+      removeCartItem,
+      updateLineItemInCart
     }}>
       {children}
     </CartContext.Provider>
