@@ -18,7 +18,7 @@ export default function Cart() {
         {cart.length > 0 ?
           (<ul role="list">
             {cart.map((product) => (
-              <div>
+              <div key={product.id.toString()}>
                 <LineItem
                   key={product.id.toString()}
                   removeCartItem={removeCartItem}
