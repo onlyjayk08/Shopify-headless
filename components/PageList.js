@@ -2,8 +2,6 @@ import Link from "next/link"
 
 export default function PageList({ pages }){
 
-    console.log(pages)
-
     return (
         <div>
             <h1>Page List</h1>

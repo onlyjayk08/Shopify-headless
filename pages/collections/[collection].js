@@ -5,16 +5,11 @@ import { useState } from "react"
 export default function CollectionPage({ collection, filterCollection }){
 
     const products = collection.products.edges
-    console.log(collection)
 
     const ProductFilters = filterCollection.products.filters
-    // console.log(ProductFilters);
 
     const [filters, setFilters] = useState(ProductFilters)
     const [selectedFilter, setSelectedFilter] = useState();
-
-
-    console.log(filters)
 
     const addFilter = () => {
 

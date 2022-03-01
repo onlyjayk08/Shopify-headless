@@ -29,8 +29,6 @@ export default function ShopProvider({ children }) {
   async function addToCart(newItem, variantQuantity) {
     setCartOpen(true)
 
-    console.log(newItem)
-
     if (cart.length === 0) {
       setCart([newItem])
 
@@ -67,8 +65,6 @@ export default function ShopProvider({ children }) {
   async function updateLineItemInCart(updateItem, itemQuantityUpdate) {
     let newCart = []
     let updated = false
-
-    console.log(updateItem);
 
     cart.map(item => {
 

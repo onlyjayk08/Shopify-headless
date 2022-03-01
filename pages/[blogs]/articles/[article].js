@@ -22,16 +22,10 @@ export async function getStaticPaths(){
         const article = String(item.node.handle)
         const blogs = String(item.node.blog.handle)
 
-        console.log("static Path")
-        console.log(article)
-        console.log(blogs)
-
         return {
           params: { blogs, article },
         }
     })
-    
-    console.log(paths)
 
     return {
         paths,
@@ -40,9 +34,6 @@ export async function getStaticPaths(){
 }
 
 export async function getStaticProps({ params }) {
-
-    console.log("params")
-    console.log(params)
 
     const article = await getArticle(params.blogs, params.article)
   

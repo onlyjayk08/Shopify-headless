@@ -93,7 +93,16 @@ export default function ProductForm({ product }) {
   return (
     <div>
       <h2 >{product.title}</h2>
-      {/* <span >{formatter.format(product.variants.edges[0].node.priceV2.amount)}</span> */}
+      {product.vendor ? <p>{product.vendor}</p> : null}
+      {product.totalInventory ? <p>Items Left: {product.totalInventory}</p> : null}
+      {product.tags? 
+      (<div>
+        <p className="pb-2">Tags</p>
+        {product.tags.map((tag,i) => (
+          <span key={`tag-${i}`} className="box-border border rounded bg-gray-200 p-1 mr-3">{tag}</span>
+        ))}
+      </div>): null
+      }
       <span >{formatter.format(selectedVariant.variantPrice)}</span>
       {
         product.options.map(({ name, values }) => (
@@ -127,7 +136,15 @@ export default function ProductForm({ product }) {
               Sold out!
           </button>
       }
-
+      <div className="pt-5">
+        {product.description ?
+        (<div>
+          <h1>Description</h1>
+          <p>{product.description}</p>
+        </div>)
+        :null
+        }
+      </div>
     </div>
   )
 }

@@ -2,8 +2,6 @@ import { getAllBlogs } from "../lib/shopify"
 import BlogList from "../components/BlogList";
 
 export default function Blogs({ blogs }){
-    
-    console.log(blogs)
 
     return(
         <div>
