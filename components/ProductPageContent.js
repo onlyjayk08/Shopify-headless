@@ -11,12 +11,9 @@ export default function ProductPageContent({ product }) {
 
   product.images.edges.map((image, i) => {
     images.push(
-      // <SwiperSlide key={`slide-${i}`}>
-      //   <Image src={image.node.originalSrc} alt={image.node.altText} layout="fill" objectFit="cover" />
-      // </SwiperSlide>
       {
-        src: images.node? image.node.originalSrc: "",
-        key: `image-${i}`
+        src: image.node.originalSrc,
+        key: `image-${image.node.originalSrc}`
       }
     )
   })
@@ -37,7 +34,7 @@ export default function ProductPageContent({ product }) {
             <Slider {...settings}>
               {images.map((slide) => (
                 <div key={slide.key}>
-                  <img className='lg:h-[36rem] mx-auto' src={slide.src} />
+                  <img className='h-[20rem] mx-auto' src={slide.src}/>
                 </div>
               ))}
             </Slider>
@@ -46,12 +43,9 @@ export default function ProductPageContent({ product }) {
         <ProductForm product={product} />
       </div>
       <div>
-        {
-        product.collections.edges[0] ?
+        {product.collections.edges[0] ?
         <RecommendedList current={product.id} products={product.collections.edges[0].node.products.edges}/>:
-        null 
-        }
-        
+        null}
       </div>
     </div>
   )
