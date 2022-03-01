@@ -46,7 +46,12 @@ export default function ProductPageContent({ product }) {
         <ProductForm product={product} />
       </div>
       <div>
-        <RecommendedList current={product.id} products={product.collections.edges[0].node.products.edges} />
+        {
+        product.collections.edges[0] ?
+        <RecommendedList current={product.id} products={product.collections.edges[0].node.products.edges}/>:
+        null 
+        }
+        
       </div>
     </div>
   )
