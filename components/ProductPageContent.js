@@ -15,7 +15,7 @@ export default function ProductPageContent({ product }) {
       //   <Image src={image.node.originalSrc} alt={image.node.altText} layout="fill" objectFit="cover" />
       // </SwiperSlide>
       {
-        src: image.node.originalSrc,
+        src: images.node? image.node.originalSrc: "",
         key: `image-${i}`
       }
     )
