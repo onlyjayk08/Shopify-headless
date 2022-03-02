@@ -4,6 +4,9 @@ import ProductOptions from "./ProductOptions"
 import { CartContext } from "../context/shopContext"
 import axios from "axios"
 import useSWR from 'swr'
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 // setup inventory fetcher
 const fetchInventory = (url, id) =>
@@ -17,6 +20,25 @@ const fetchInventory = (url, id) =>
 
 export default function ProductForm({ product }) {
 
+  const images = []
+
+  product.images.edges.map((image, i) => {
+    images.push(
+      {
+        src: image.node.originalSrc,
+        key: `image-${image.node.originalSrc}`
+      }
+    )
+  })
+
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
   const { data: productInventory } = useSWR(
     ['/api/available', product.handle],
     (url, id) => fetchInventory(url, id),
@@ -25,7 +47,7 @@ export default function ProductForm({ product }) {
 
   const [available, setAvailable] = useState(true)
 
-  
+
   const { addToCart } = useContext(CartContext)
 
   const allVariantOptions = product.variants.edges?.map(variant => {
@@ -86,22 +108,31 @@ export default function ProductForm({ product }) {
     }
   }, [productInventory, selectedVariant])
 
-  const handleQuantityChange = (event) =>{
+  const handleQuantityChange = (event) => {
     setVariantQuantity(event.target.value);
   }
 
   return (
     <div>
-      <h2 >{product.title}</h2>
+      <div className='pb-10'>
+        <Slider {...settings}>
+          {images.map((slide) => (
+            <div key={slide.key}>
+              <img className='h-[20rem] mx-auto' src={slide.src} />
+            </div>
+          ))}
+        </Slider>
+      </div>
+      <h2 className="text-2xl">{product.title}</h2>
       {product.vendor ? <p>{product.vendor}</p> : null}
       {product.totalInventory ? <p>Items Left: {product.totalInventory}</p> : null}
-      {product.tags? 
-      (<div>
-        <p className="pb-2">Tags</p>
-        {product.tags.map((tag,i) => (
-          <span key={`tag-${i}`} className="box-border border rounded bg-gray-200 p-1 mr-3">{tag}</span>
-        ))}
-      </div>): null
+      {product.tags ?
+        (<div>
+          <p className="pb-2">Tags</p>
+          {product.tags.map((tag, i) => (
+            <span key={`tag-${i}`} className="box-border border rounded bg-gray-200 p-1 mr-3">{tag}</span>
+          ))}
+        </div>) : null
       }
       <span >{formatter.format(selectedVariant.variantPrice)}</span>
       {
@@ -118,31 +149,31 @@ export default function ProductForm({ product }) {
           />
         ))
       }
-      <br/>
+      <br />
       <label>
         Quantity
         <input min="1" type="number" defaultValue={variantQuantity} onChange={handleQuantityChange}></input>
       </label>
-      <br/>
+      <br />
       {
         available ?
           <button
             onClick={() => {
               addToCart(selectedVariant, variantQuantity)
             }}
-            >Add To Card
+          >Add To Card
           </button> :
           <button>
-              Sold out!
+            Sold out!
           </button>
       }
       <div className="pt-5">
         {product.description ?
-        (<div>
-          <h1>Description</h1>
-          <p>{product.description}</p>
-        </div>)
-        :null
+          (<div>
+            <h1>Description</h1>
+            <p>{product.description}</p>
+          </div>)
+          : null
         }
       </div>
     </div>
