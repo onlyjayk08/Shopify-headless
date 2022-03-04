@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { createCustomer } from "../lib/shopify";
 
 export default function accounts() {
@@ -6,12 +6,11 @@ export default function accounts() {
     const [password, setPassword] = useState("");
     const [firstName, SetFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [phone, setPhone] = useState("")
+    // const [phone, setPhone] = useState("")
 
     const handleSubmit = (e) => {
         
         e.preventDefault();
-
         const input = {
             firstName: firstName,
             lastName: lastName,
@@ -24,10 +23,6 @@ export default function accounts() {
         const data = createCustomer(input)
         console.log(data)
     };
-
-    useEffect(() => {
-
-    }, [])
 
     return (
         <div>
