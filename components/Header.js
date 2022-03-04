@@ -23,7 +23,7 @@ export default function Header({collections, storeName}){
                         </a>
                     </Link> 
                 </div>
-                <Link href="/account">
+                <Link href="/accounts">
                     <a>
                         Account
                     </a>

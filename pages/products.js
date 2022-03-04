@@ -10,11 +10,13 @@ export default function Products({ allProducts, first }){
 
     const loadMore = async () =>{
         setFirstProduct(firstProduct + 4)
+    }   
+
+    useEffect(async ()=>{
         const allProducts = await getAllProducts(firstProduct);
         setProductsEdges(allProducts.edges)
         setPageInfo(allProducts.pageInfo.hasNextPage)
-    }   
-
+    },[firstProduct])
 
     return(
         <div>
