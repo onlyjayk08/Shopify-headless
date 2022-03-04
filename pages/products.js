@@ -1,6 +1,6 @@
 import { getAllProducts } from "../lib/shopify";
 import ProductList from "../components/ProductList";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Products({ allProducts, first }){
 
