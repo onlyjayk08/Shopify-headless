@@ -6,7 +6,10 @@ export default function Accounts() {
     const [password, setPassword] = useState("");
     const [firstName, SetFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    // const [phone, setPhone] = useState("")
+    // const [phone, setPhone] = useState("");
+
+    const [lemail, setlEmail] = useState("");
+    const [lpassword, setlPassword] = useState("");
 
     const handleSubmit = (e) => {
         
@@ -23,6 +26,19 @@ export default function Accounts() {
         const data = createCustomer(input)
         console.log(data)
     };
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+
+        const input = {
+            email: lemail,
+            password: lpassword
+        }
+
+        const data = await customerAccessTokenCreate(input);
+
+        console.log(data)
+    }
 
     return (
         <div>
@@ -45,6 +61,17 @@ export default function Accounts() {
                 <input type="number" id="phone" placeholder="Phone Number" name={"phone"} value={phone} onChange={(event) => setPhone(event.target.value)}></input>
                 <br /> */}
                 <button type="submit">{'Sign up'}</button>
+            </form>
+
+            <br/><br/><br/>
+            <form onSubmit={handleLogin}>
+                <label>Enter your Email</label>
+                <input type="email" id="lemail" placeholder="Email" name={"email"} value={lemail} onChange={(event) => { setlEmail(event.target.value) }} required />
+                <br />
+                <label>Enter your Password</label>
+                <input type="password" id="lpassword" placeholder="Password" name={"password"} value={lpassword} onChange={(event) => setlPassword(event.target.value)} required/>                
+                <br/>
+                <button type="submit">{'Log In'}</button>
             </form>
         </div>
     )
