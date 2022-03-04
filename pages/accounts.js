@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { createCustomer } from "../lib/shopify";
 
-export default function accounts() {
+export default function Accounts() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [firstName, SetFirstName] = useState("");
