@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { createCustomer } from "../../lib/shopify";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Register(){
+    const router = useRouter();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -23,6 +25,9 @@ export default function Register(){
         }
         const data = await createCustomer(input)
         console.log(data)
+        if (data.customer){
+            router.push('/account/login')
+        }
     };
 
     return(

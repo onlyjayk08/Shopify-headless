@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import { useRouter } from "next/router";
 import { getCustomer } from "../lib/shopify";
+import CustomerAddress from "../components/CustomerAddress";
+import CustomerOrder from "../components/CustomerOrder";
 
 export default function Customer(){
     const router = useRouter();
@@ -41,6 +43,8 @@ export default function Customer(){
                 <button onClick={handleLogout}>    
                     Logout
                 </button>
+                <CustomerOrder orders={customer.orders.edges}/>
+                <CustomerAddress customerAccessToken={accessToken} addresses={customer.addresses.edges}/>
             </div>): null}
         </div>
     )
