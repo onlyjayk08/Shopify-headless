@@ -11,7 +11,7 @@ export default function OrderList({ order }){
             <Link
             href={{
                 pathname: `/customer/order/${order.id}`,
-                query: { order: JSON.stringify(order) }
+                query: { orderId: order.id }
               }}>
                 <a>
                     <p>name: {order.name}</p>

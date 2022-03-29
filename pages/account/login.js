@@ -51,6 +51,13 @@ export default function Login(){
                     or Create an Account
                 </a>
             </Link>
+            <br/>
+            <br/>
+            <Link href={"/forgotPassword"}>
+                <a>
+                    Forgot Password
+                </a>
+            </Link>
         </div>
     )
 }
