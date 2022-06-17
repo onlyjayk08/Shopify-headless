@@ -1,23 +1,34 @@
 import { getAllCollections ,recursiveCollectionCatalog, getCollection, getFilteredCollection } from "../../lib/shopify"
 import ProductList from "../../components/ProductList"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function CollectionPage({ collection, filterCollection }){
 
-    const products = collection.products.edges
+    // const products = collection.products.edges
 
     const ProductFilters = filterCollection.products.filters
 
+    console.log(ProductFilters)
+
+    const [products, SetProducts] = useState(collection.products.edges)
     const [filters, setFilters] = useState(ProductFilters)
-    const [selectedFilter, setSelectedFilter] = useState();
 
-    const addFilter = () => {
+    const [queryFilter, setQueryFilter] = useState([{
+      variantOption: {
+        name: "Size",
+        value: "m"
+      }
+    },
+    {
+      productVendor: "Chuzefitness.com"
+    }]
+    )
 
-    }
-
-    const fil = (value) =>{
-      
-    }
+    useEffect(async ()=> {
+      const filteredCollection =  await getCollection(collection.handle, queryFilter)
+      SetProducts(filteredCollection.products.edges)
+      console.log("collectionFilter",filteredCollection.products.edges)
+    },[queryFilter])
 
     return (
         <div>
@@ -33,7 +44,10 @@ export default function CollectionPage({ collection, filterCollection }){
                   <ul role="list">
                     {filter.values.map((value, i) => (
                       <div key={`filtervalue-${i}`}>
-                        <li>{value.label}({value.count})</li>
+                        <li>
+                          <input type="checkbox" id={`${filter.label}-${value.label}`} /> 
+                          <label for={`${filter.label}-${value.label}`}>{value.label}({value.count})</label>
+                        </li>
                       </div>
                     ))}
                   </ul>
@@ -65,7 +79,8 @@ export async function getStaticPaths() {
 }
   
 export async function getStaticProps({ params }) {
-  const collection = await getCollection(params.collection)
+  const filter = {}
+  const collection = await getCollection(params.collection, filter)
   const filterCollection = await getFilteredCollection(params.collection)
 
   return {

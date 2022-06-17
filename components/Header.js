@@ -13,28 +13,33 @@ export default function Header({collections, storeName}){
     })
 
     return (
-        <header className="h-20 lg:h-32" role="banner">
+        <header className=" py-8 items-center grid grid-cols-3" role="banner">
         <div className="h-full lag:flex-col place-content-between">
             <div className="text-center w-full flex justify-between items-center">
-                <div className="uppercase text-3xl tracking-widest">
+                <div className="uppercase text-3xl tracking-widest m-0 leading-0">
                     <Link href="/">
                         <a>
                             {storeName}
                         </a>
                     </Link> 
-                </div>
-                <Link href="/account/login">
-                    <a>
-                        Account
-                    </a>
-                </Link>  
-                <Link href="/cart">
-                    <a>
-                        Cart({cartQuantity})
-                    </a>
-                </Link>              
+                </div>          
             </div> 
-            <Navbar collections={collections} storeName={storeName}/>
+            
+        </div>
+        <div>
+        <Navbar collections={collections} storeName={storeName}/>
+        </div>
+        <div className="justify-self-end flex">
+        <Link href="/account/login">
+            <a>
+                Account
+            </a>
+        </Link>  
+        <Link href="/cart">
+            <a>
+                Cart({cartQuantity})
+            </a>
+        </Link> 
         </div>
         </header>
     )
